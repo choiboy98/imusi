@@ -15,7 +15,7 @@ def hello_world():
 	return 'Hello, World!'
 
 # image bytes as parameter
-@app.route('/image/', methods=["POST"])
+@app.route('/image/', methods=["GET", "POST"])
 def push_image():
 	#print(request.form)
 	# image_bytes = request.form
