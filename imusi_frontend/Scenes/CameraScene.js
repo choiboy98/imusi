@@ -4,11 +4,14 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
+var base64js = require('base64-js');
+
 export default class CameraScene extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
     flash: false,
+    byteArray: null
   };
 
   async componentDidMount() {
@@ -28,8 +31,10 @@ export default class CameraScene extends React.Component {
 
   snap = async() => {
     if (this.camera) {
-      let photo = await this.camera.takePictureAsync();
-      console.log(photo);
+      let photo = await this.camera.takePictureAsync({base64: true});
+      this.state.byteArray = base64js.toByteArray(photo.base64);
+      //console.log(this.state.byteArray);
+      //console.log(base64js.toByteArray(photo['base64']));
     }
   }
 
