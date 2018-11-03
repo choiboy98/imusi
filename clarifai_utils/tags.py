@@ -1,8 +1,11 @@
 from clarifai.rest import ClarifaiApp
-from clarifai_utils.key import CLARIFAI_KEY
+import os
 
-app = ClarifaiApp(api_key=CLARIFAI_KEY)
+key = os.environ.get('CLARIFAI_KEY')
+print(os.environ)
+app = ClarifaiApp(api_key=key)
 model = app.public_models.general_model
+
 def get_relevant_tags(image_bytes):
     
     image = app.inputs.create_image_from_bytes(image_bytes)
