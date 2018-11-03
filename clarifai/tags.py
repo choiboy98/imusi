@@ -1,0 +1,16 @@
+from clarifai.rest import ClarifaiApp
+
+app = ClarifaiApp()
+model = app.public_models.general_model
+def get_relevant_tags(image):
+    
+    response_data = model.predict_by_filename(image)
+ 
+    tag_files = []
+    for concept in response_data['outputs'][0]['data']['concepts']:
+        tag_files.append(concept['name'])
+ 
+
+    return tag_files
+image = "carnival.jpg"
+print (' '.join(get_relevant_tags(image)))
