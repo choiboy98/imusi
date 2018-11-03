@@ -15,17 +15,10 @@ def hello_world():
 # image bytes as parameter
 @app.route('/image/', methods=["GET", "POST"])
 def push_image():
-	#print(request.form)
-	# image_bytes = request.form
-	#concepts = get_relevant_tags(image_bytes['bytes'])
-	print(request.form)
-	sys.stdout.flush()
-	image_bytes = request.form['bytes']
-	print(len(image_bytes))
-	sys.stdout.flush()
+	concepts = get_relevant_tags(image_bytes['bytes'])
 	#pipe_model(image_bytes['bytes'], concepts)
 
-	return image_bytes
+	return concepts
 
 def pipe_model(image_bytes, concepts):
 	features = calculate_image_vector(image_bytes, concepts)

@@ -6,7 +6,6 @@ app = ClarifaiApp(api_key=key)
 model = app.public_models.general_model
 
 def get_relevant_tags(image_bytes):
-    
     image = app.inputs.create_image_from_bytes(image_bytes)
     response_data = model.predict_by_filename(image)
  
