@@ -5,11 +5,11 @@ import sys
 
 MAX = 120
 
-def calc_vibrance(image):
+def calc_vibrance(image_arr):
     '''
     Source: https://www.pyimagesearch.com/2017/06/05/computing-image-colorfulness-with-opencv-and-python/
     '''
-    B, G, R = cv2.split(image.astype("float"))
+    B, G, R = cv2.split(image_arr.astype("float"))
  
     rg = np.absolute(R - G)
     yb = np.absolute(0.5 * (R + G) - B)
