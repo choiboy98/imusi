@@ -24,7 +24,7 @@ def pipe_model(image_bytes, concepts):
 	features = calculate_image_vector(image_bytes, concepts)
 
 def pipe_spotify():
-	
+	pass
 
 @app.route('/brandon', methods=["GET"])
 def push_brandonc():
