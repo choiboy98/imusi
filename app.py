@@ -20,7 +20,7 @@ def push_image():
 	print(image_bytes)
 	#pipe_model(image_bytes['bytes'], concepts)
 
-	return image_bytes
+	return "hi"
 
 def pipe_model(image_bytes, concepts):
 	features = calculate_image_vector(image_bytes, concepts)
