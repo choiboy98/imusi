@@ -17,11 +17,11 @@ def hello_world():
 # image bytes as parameter
 @app.route('/image/', methods=["POST"])
 def push_image():
-	print("in post")
-	sys.stdout.flush()
 	#print(request.form)
 	# image_bytes = request.form
 	#concepts = get_relevant_tags(image_bytes['bytes'])
+	print(request.form)
+	sys.stdout.flush()
 	image_bytes = request.form['bytes']
 	print(len(image_bytes))
 	sys.stdout.flush()
