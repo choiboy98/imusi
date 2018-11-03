@@ -20,12 +20,12 @@ def push_image():
 	#concepts = get_relevant_tags(image_bytes['bytes'])
 	print(request.form)
 	sys.stdout.flush()
-	image_bytes = request.form['bytes'][:100]
+	image_bytes = request.form['bytes']
 	print(len(image_bytes))
 	sys.stdout.flush()
 	#pipe_model(image_bytes['bytes'], concepts)
 
-	return "hi"
+	return image_bytes
 
 def pipe_model(image_bytes, concepts):
 	features = calculate_image_vector(image_bytes, concepts)
