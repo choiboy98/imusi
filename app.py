@@ -10,8 +10,6 @@ app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-	print('hi')
-	sys.stdout.flush()
 	return 'Hello, World!'
 
 # image bytes as parameter
@@ -20,9 +18,9 @@ def push_image():
 	#print(request.form)
 	# image_bytes = request.form
 	#concepts = get_relevant_tags(image_bytes['bytes'])
-	print(request.form)
+	print(request.headers)
 	sys.stdout.flush()
-	image_bytes = request.form['bytes']
+	image_bytes = request.form['bytes'][:100]
 	print(len(image_bytes))
 	sys.stdout.flush()
 	#pipe_model(image_bytes['bytes'], concepts)
