@@ -43,7 +43,7 @@ export default class CameraScene extends React.Component {
     console.log("inside data");
   try {
     console.log("inside try");
-    let response = await fetch('https://imusi.herokuapp.com/images', {
+    let response = await fetch('https://imusi.herokuapp.com/image', {
       method: 'POST',
       headers: {
         Accept: 'application/json',
