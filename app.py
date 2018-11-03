@@ -15,7 +15,7 @@ def hello_world():
 # image bytes as parameter
 @app.route('/image/', methods=["GET", "POST"])
 def push_image():
-	concepts = get_relevant_tags(image_bytes['bytes'])
+	concepts = get_relevant_tags(request.form['bytes'])
 	#pipe_model(image_bytes['bytes'], concepts)
 
 	return concepts
