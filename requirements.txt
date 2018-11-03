@@ -3,3 +3,8 @@ flask
 gunicorn
 clarifai
 requests
+numpy
+imutils
+opencv-python
+colour-science
+scipy

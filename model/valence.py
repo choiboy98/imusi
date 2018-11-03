@@ -1,5 +1,5 @@
-from sentiment import calc_image_sentiment
-from brightness import calc_brightness
+from model.sentiment import calc_image_sentiment
+from model.brightness import calc_brightness
 
 def calc_valence(image_arr, concepts):
     b = calc_brightness(image_arr)

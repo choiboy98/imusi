@@ -29,3 +29,6 @@ def pipe_spotify():
 @app.route('/brandon', methods=["GET"])
 def push_brandonc():
 	return 'Hi'
+
+if __name__ == '__main__':
+	app.run()

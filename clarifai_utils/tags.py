@@ -1,6 +1,7 @@
 from clarifai.rest import ClarifaiApp
+from clarifai_utils.key import CLARIFAI_KEY
 
-app = ClarifaiApp()
+app = ClarifaiApp(api_key=CLARIFAI_KEY)
 model = app.public_models.general_model
 def get_relevant_tags(image_bytes):
     
