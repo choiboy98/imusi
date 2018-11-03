@@ -17,8 +17,7 @@ def push_image():
 	#print(request.form)
 	# image_bytes = request.form
 	#concepts = get_relevant_tags(image_bytes['bytes'])
-	# print(len(image_bytes['bytes']))
-    print(request.__dir__())
+	print(request.__dir__())# print(len(image_bytes['bytes']))
 	#pipe_model(image_bytes['bytes'], concepts)
 
 	return "hi"
