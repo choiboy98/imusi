@@ -15,9 +15,10 @@ def hello_world():
 def push_image():
 	print("hi")
 	#print(request.form)
-	image_bytes = request.form
+	# image_bytes = request.form
 	#concepts = get_relevant_tags(image_bytes['bytes'])
-	print(len(image_bytes['bytes']))
+	# print(len(image_bytes['bytes']))
+    print(request.__dir__())
 	#pipe_model(image_bytes['bytes'], concepts)
 
 	return "hi"
