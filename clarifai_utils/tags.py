@@ -2,7 +2,6 @@ from clarifai.rest import ClarifaiApp
 import os
 
 key = os.environ.get('CLARIFAI_KEY')
-print(os.environ)
 app = ClarifaiApp(api_key=key)
 model = app.public_models.general_model
 
