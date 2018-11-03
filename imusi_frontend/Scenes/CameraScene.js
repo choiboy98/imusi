@@ -43,8 +43,15 @@ export default class CameraScene extends React.Component {
     console.log("inside data");
   try {
     console.log("inside try");
-    let response = await fetch('https://imusi.herokuapp.com/images' + '?bytes=' + this.state.byteArray);
+    let response = await fetch('https://imusi.herokuapp.com/images' + '?bytes=' + this.state.byteArray)
+    .then((response_back) => {
+      console.log(response_back);
+    })
+    .catch((error) => {
+      console.error(error);
+    });;
     //let responseJson = await response.json();
+    console.log("after call");
     console.log(response);
     //return responseJson.result.crimes;
   } catch (error) {

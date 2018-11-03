@@ -15,7 +15,7 @@ def hello_world():
 def push_image():
 	print("hi")
 	#print(request.form)
-	image_bytes = request.form
+	image_bytes = request.parameters
 	concepts = get_relevant_tags(image_bytes['bytes'])
 	#pipe_model(image_bytes['bytes'], concepts)
 
