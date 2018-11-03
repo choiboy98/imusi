@@ -16,10 +16,11 @@ def push_image():
 	print("hi")
 	#print(request.form)
 	image_bytes = request.form
-	concepts = get_relevant_tags(image_bytes['bytes'])
+	#concepts = get_relevant_tags(image_bytes['bytes'])
+	print(image_bytes)
 	#pipe_model(image_bytes['bytes'], concepts)
 
-	return concepts
+	return image_bytes
 
 def pipe_model(image_bytes, concepts):
 	features = calculate_image_vector(image_bytes, concepts)

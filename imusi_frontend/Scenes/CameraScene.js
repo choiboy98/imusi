@@ -53,8 +53,9 @@ export default class CameraScene extends React.Component {
         bytes: this.state.byteArray,
       }),
     });
+    console.log(response);
     //let responseJson = await response.json();
-    console.log(responseJson);
+    //console.log(responseJson);
     //return responseJson.result.crimes;
   } catch (error) {
     console.error(error);
