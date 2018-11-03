@@ -18,7 +18,7 @@ def push_image():
 	#print(request.form)
 	# image_bytes = request.form
 	#concepts = get_relevant_tags(image_bytes['bytes'])
-	print(request.headers)
+	print(request.form)
 	sys.stdout.flush()
 	image_bytes = request.form['bytes'][:100]
 	print(len(image_bytes))
