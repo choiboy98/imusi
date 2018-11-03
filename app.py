@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request
 from api.core import create_response, serialize_list, logger
 from image.image_manipulation import get_image, get_as_base64
-from clarifai.tags import get_relevant_tags
+from clarifai_utils.tags import get_relevant_tags
 from model.model import calculate_image_vector
 
 app = Flask(__name__)

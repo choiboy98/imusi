@@ -1,3 +1,5 @@
 nltk
 flask
 gunicorn
+clarifai
+requests
