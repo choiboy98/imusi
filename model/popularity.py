@@ -1,5 +1,5 @@
 import pickle
-from word_relativity import calc_word_relativity
+from model.word_relativity import calc_word_relativity
 import numpy as np
 
 NORM = np.inf
@@ -11,7 +11,7 @@ def load_lyric_model(filename):
     return genres
 
 def calc_popularity(image_concepts):
-    lyric_words = load_lyric_model('lyric_data.dat')
+    lyric_words = load_lyric_model('model/lyric_data.dat')
 
     score = []
     for lyric in lyric_words:

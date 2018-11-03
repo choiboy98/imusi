@@ -1,4 +1,4 @@
-from word_relativity import calc_word_relativity
+from model.word_relativity import calc_word_relativity
 import numpy as np
 
 NORM = 2

@@ -1,0 +1,10 @@
+nltk
+flask
+gunicorn
+clarifai
+requests
+numpy
+imutils
+opencv-python==3.4.3.18
+colour-science
+scipy

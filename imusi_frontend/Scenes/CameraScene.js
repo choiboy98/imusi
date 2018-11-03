@@ -33,10 +33,34 @@ export default class CameraScene extends React.Component {
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({base64: true});
       this.state.byteArray = base64js.toByteArray(photo.base64);
+      this.getSpotifyData()
       //console.log(this.state.byteArray);
       //console.log(base64js.toByteArray(photo['base64']));
     }
   }
+
+  async getSpotifyData() {
+    console.log("inside data");
+  try {
+    console.log("inside try");
+    let response = await fetch('https://imusi.herokuapp.com/image', {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        bytes: this.state.byteArray,
+      }),
+    });
+    console.log(response);
+    //let responseJson = await response.json();
+    //console.log(responseJson);
+    //return responseJson.result.crimes;
+  } catch (error) {
+    console.error(error);
+  }
+}
 
   setCameraRef = (ref) => {
     this.camera = ref;
