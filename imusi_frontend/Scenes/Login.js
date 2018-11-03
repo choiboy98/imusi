@@ -1,5 +1,6 @@
 import React from "react";
-import { Button, StyleSheet, View, Dimensions, Text, Image, TextInput } from "react-native";
+import { Button, StyleSheet, View, Dimensions, Text, Image, TextInput, ImageBackground , Icon} from "react-native";
+
 
 export default class Login extends React.Component {
   constructor(props) {
@@ -17,18 +18,47 @@ export default class Login extends React.Component {
     return (
       <View style = {styles.container}>
         <View style = {styles.logoContainer}>
-          <Image
-            style = {styles.logo}
-            source = {require('../assets/Treble.png')}
-            />
 
+          <ImageBackground
+            source = {require("../assets/snowy_mountain_background.png")}
+            style = {styles.logoContainer}
+            >
+          <Image
+            style = {{width:400,height:250,marginTop: 40}}
+            source = {require('../assets/imusi_logo_2.png')}
+            
+            />
+          
           <TextInput
             style = {styles.input} 
-            pleaceholderTextColor = "#fff"
+            autocorrect = {false}
             placeholder = "Spotify Username"
             />
 
-            <Text>Hi</Text>
+          <TextInput
+            style = {styles.input2}
+            autocorrect = {false}
+            placeholder = "Password"
+            />
+
+          <View style = {styles.buttonBox}>
+            <Button title="Log in" color = "#fff" />
+
+            </View>
+
+          <Text style = {{color: '#fff', marginTop: 100, marginBottom: 5, textAlign: 'center'}}>
+            Don't have Spotify?
+            </Text> 
+
+          <View style = {styles.buttonBox1}>
+          
+            <Button 
+              color = "rgb(154,236,219)"
+              title = 'Skip this step'
+              marginBottom = {20}
+            />
+            </View>
+          </ImageBackground>
         </View>
       </View>
     );
@@ -38,26 +68,51 @@ export default class Login extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#3498db',
+    backgroundColor: '#ffffff',
   },
 
   logoContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    flexGrow: 1,
+    flex: 1,
+    width:'100%',
+    height: '100%'
   },
 
-  logo: {
-    width: 30,
-    height: 83,
+  
+  buttonBox: {
+    width: 175,
+    height: 40,
+    backgroundColor: "rgba(154,236,219, 0.5)",
+    borderRadius: 20
   },
-
+  buttonBox1: {
+    width: 175,
+    height: 40,
+    backgroundColor: "rgba(119,140,163,0.8)",
+    borderRadius: 20
+  },
   input: {
     height: 40,
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    margin: 20,
+    width: 175,
+    textAlign: 'center',
+    marginTop: -40,
+    backgroundColor: "rgba(255,255,255,0.5)",
+    marginBottom: 20,
     color: '#fff',
-    paddingHorizontal: 20
+    borderRadius: 20,
+    paddingHorizontal: 20,
+  },
+  input2: {
+    height: 40,
+    width: 175,
+    textAlign: 'center',
+    marginTop: -15,
+    backgroundColor: "rgba(255,255,255,0.5)",
+    marginBottom: 20,
+    color: '#fff',
+    borderRadius: 20,
+    paddingHorizontal: 20,
   },
 
 });
