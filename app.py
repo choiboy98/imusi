@@ -17,12 +17,14 @@ def hello_world():
 # image bytes as parameter
 @app.route('/image/', methods=["POST"])
 def push_image():
-	print("hi")
+	print("in post")
+	sys.stdout.flush()
 	#print(request.form)
 	# image_bytes = request.form
 	#concepts = get_relevant_tags(image_bytes['bytes'])
-	print(request.__dir__())# print(len(image_bytes['bytes']))
-	print(type(request.form))
+	image_bytes = request.form['bytes']
+	print(len(image_bytes))
+	sys.stdout.flush()
 	#pipe_model(image_bytes['bytes'], concepts)
 
 	return "hi"
