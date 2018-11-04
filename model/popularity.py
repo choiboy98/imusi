@@ -11,7 +11,7 @@ def load_lyric_model(filename):
     return genres
 
 def calc_popularity(image_concepts):
-    lyric_words = load_lyric_model('model/lyric_data.dat')
+    lyric_words = load_lyric_model('./model/data/lyric_data.dat')
 
     score = []
     for lyric in lyric_words:

@@ -16,7 +16,7 @@ def load_sentiment_model(file):
 
 def calc_image_sentiment(image_concepts):
     sentiments = []
-    sentiment_model = load_sentiment_model('./model/sentiment_model.dat')
+    sentiment_model = load_sentiment_model('./model/data/sentiment_model.dat')
     for concept in image_concepts:
         word_sentiment = calc_sentiment(concept)
         sentence_sentiment = sentiment_model.get(concept, 0)
