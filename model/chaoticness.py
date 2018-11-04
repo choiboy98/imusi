@@ -14,7 +14,6 @@ def calc_chaos(image_concepts):
             if concept1 == concept2:
                 continue
             relativeness = calc_word_relativity(concept1, concept2)
-            print(concept1, concept2, relativeness)
             relativity_vector.append(relativeness)
 
         relativity_vector = np.array(relativity_vector)
