@@ -17,17 +17,9 @@ def index():
 # image bytes as parameter
 @app.route('/image/', methods=["POST"])
 def post_image():
-	print('here1')
-	sys.stdout.flush()
 	image_bytes = request.form['bytes'].encode()
-	print('here2')
-	sys.stdout.flush()
 	concepts = get_relevant_tags(image_bytes)
-	print('here3')
-	sys.stdout.flush()
 	feature_vector = calculate_image_vector(image_bytes, concepts)
-	print('here4')
-	sys.stdout.flush()
 	songs = get_recommendations(*feature_vector)
 
 	return json.dumps(songs)
