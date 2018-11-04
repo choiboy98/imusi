@@ -41,8 +41,8 @@ export default class CameraScene extends React.Component {
       let shrunk64 = resizebase64(photo.base64, MAX_WIDTH);
       this.setState({
         loading: true,
-        byteArray: shrunk64,
       });
+      this.state.byteArray = shrunk64;
       this.getSpotifyData()
     }
   }
@@ -50,6 +50,7 @@ export default class CameraScene extends React.Component {
   async getSpotifyData() {
     try {
       var formData = new FormData();
+      console.log(this.state.byteArray.substring(0, 100));
       formData.append('bytes', this.state.byteArray);
 
       let response = await fetch('https://imusi.herokuapp.com/image/', {
@@ -64,6 +65,7 @@ export default class CameraScene extends React.Component {
         this.setState({
           loading:false,
         })
+          //this.props.navigation.navigate('PandoraScreen');
                 console.log(fetchedMusic);
 
       }
