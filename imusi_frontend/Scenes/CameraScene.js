@@ -4,6 +4,8 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
+import FormData from 'FormData';
+
 var base64js = require('base64-js');
 
 export default class CameraScene extends React.Component {
@@ -32,7 +34,7 @@ export default class CameraScene extends React.Component {
   snap = async() => {
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({base64: true});
-      this.state.byteArray = this.bin2String(base64js.toByteArray(photo.base64));
+      this.state.byteArray = photo.base64;
       this.getSpotifyData()
       //console.log(this.state.byteArray);
       //console.log(base64js.toByteArray(photo['base64']));
@@ -46,16 +48,18 @@ export default class CameraScene extends React.Component {
     console.log(this.state.byteArray.substring(0, 100));
 
     console.log("inside try");
-    let response = await fetch('https://imusi.herokuapp.com/image', {
+
+    var formData = new FormData();
+    formData.append('bytes', this.state.byteArray);
+
+    let response = await fetch('https://imusi.herokuapp.com/image/', {
       method: 'POST',
       mode: 'cors',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({
-        bytes: "hi",
-      }),
+      body: formData,
     });
     console.log(response);
     //let responseJson = await response.json();

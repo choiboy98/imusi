@@ -42,7 +42,7 @@ export default class Login extends React.Component {
             />
 
           <View style = {styles.buttonBox}>
-            <Button title="Log in" color = "#fff" />
+            <Button title="Log in" color = "#fff" onPress={() => this.props.navigation.navigate('CameraScreen')}/>
 
             </View>
 
@@ -56,6 +56,7 @@ export default class Login extends React.Component {
               color = "rgb(154,236,219)"
               title = 'Skip this step'
               marginBottom = {20}
+              onPress={() => this.props.navigation.navigate('CameraScreen')}
             />
             </View>
           </ImageBackground>
