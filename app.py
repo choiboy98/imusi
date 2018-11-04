@@ -13,9 +13,10 @@ def hello_world():
 	return 'Hello, World!'
 
 # image bytes as parameter
-@app.route('/image/', methods=["GET", "POST"])
+@app.route('/image/', methods=["POST"])
 def push_image():
-	concepts = get_relevant_tags(request.form['bytes'])
+	image_bytes = request.form['bytes']
+	concepts = get_relevant_tags(image_bytes)
 	#pipe_model(image_bytes['bytes'], concepts)
 
 	return concepts
