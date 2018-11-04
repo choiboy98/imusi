@@ -1,0 +1,22 @@
+body {
+    font-family: 'Roboto', sans-serif;
+}
+
+#background {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0; 
+    background-image: url('/static/back.png');
+    background-repeat: no-repeat;
+    background-position: center; 
+    background-size: cover;
+    z-index: -1;
+}
+
+#logo {
+    margin-top: 5vh;
+    width: 25%;
+    height: 25%;
+}

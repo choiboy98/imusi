@@ -2,6 +2,7 @@ from clarifai.rest import ClarifaiApp
 import os
 
 BLACK_LIST = {'no person'}
+MAX = 5
 
 key = os.environ.get('CLARIFAI_KEY')
 app = ClarifaiApp(api_key=key)
@@ -20,4 +21,4 @@ def get_relevant_concepts(image_bytes):
         if valid_concept(name):
             concepts.append(name)
 
-    return concepts[:5]
+    return concepts[:MAX]
