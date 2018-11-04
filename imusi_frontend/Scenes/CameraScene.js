@@ -3,13 +3,12 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { Camera, Permissions } from 'expo';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
-import ImageResizer from 'react-native-image-resizer';
 
 import FormData from 'FormData';
 import Loader from './Loader';
 
 var resizebase64 = require('resize-base64');
-let MAX_WIDTH = 250;
+let MAX_WIDTH = 100;
 
 export default class CameraScene extends React.Component {
   state = {
@@ -36,16 +35,20 @@ export default class CameraScene extends React.Component {
   }
 
   snap = async() => {
+    console.log("pressed!");
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({base64: true});
-      console.log(photo.base64.length);
-      let shrunk64 = resizebase64(photo.base64, MAX_WIDTH);
-      console.log(shrunk64.length);
-      
       this.setState({
         loading: true,
       });
-      this.state.byteArray = shrunk64;
+
+      // console.log(photo.uri);
+      // console.log(photo.base64.length);
+      // let shrunk64 = resizebase64(photo.base64, MAX_WIDTH);
+      // console.log("length" + shrunk64.length);
+
+
+      this.state.byteArray = photo.base64;
       this.getSpotifyData()
     }
   }
@@ -64,21 +67,13 @@ export default class CameraScene extends React.Component {
           'Content-Type': 'application/json',
         },
         body: formData,
-      }).then((fetchedMusic) => {
+      }).then((fetchedMusic) => fetchedMusic.json())
+      .then((fetchedMusicJson) => {
         this.setState({
           loading:false,
         })
-          //this.props.navigation.navigate('PandoraScreen');
-                console.log(fetchedMusic);
-
+        console.log(fetchedMusicJson)
       }
-      // fetchedMusic.json())
-      // .then((fetchedMusicJson) => {
-      //   this.setState({
-      //     loading:false,
-      //   })
-      //   console.log(fetchedMusicJson)
-      // }
       );
     } catch (error) {
       console.error(error);
