@@ -32,7 +32,7 @@ def calc_temperature(dominant_color):
     return 1 - (min(temperature[0], MAX) / MAX)
 
 def calc_image_temperature(image_array):
-    dominant = get_dominant_color(image)
+    dominant = get_dominant_color(image_array)
     temperature = calc_temperature(dominant)
     return temperature
 

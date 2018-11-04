@@ -15,14 +15,11 @@ def hello_world():
 # image bytes as parameter
 @app.route('/image/', methods=["POST"])
 def push_image():
-	image_bytes = request.form['bytes']
+	image_bytes = request.form['bytes'].encode()
 	concepts = get_relevant_tags(image_bytes)
-	#pipe_model(image_bytes['bytes'], concepts)
+	feature_vector = calculate_image_vector(image_bytes, concepts)
 
-	return concepts
-
-def pipe_model(image_bytes, concepts):
-	features = calculate_image_vector(image_bytes, concepts)
+	return str(feature_vector)
 
 def pipe_spotify():
 	pass

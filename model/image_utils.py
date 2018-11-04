@@ -1,9 +1,12 @@
 import cv2
+import base64
 import numpy as np
 
 def bytes_to_rgb(image_bytes):
-    '''
-    Source: https://stackoverflow.com/questions/49511753/python-byte-image-to-numpy-array-using-opencv
-    '''
-    decoded = cv2.imdecode(np.frombuffer(image_bytes, np.uint8), -1)
-    return decoded
+    # img_arr = imread(io.BytesIO(base64.b64decode(image_bytes)))
+    # return img_arr
+
+    decoded = base64.b64decode(image_bytes)
+    nparr = np.fromstring(decoded, np.uint8)
+    img = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+    return img
