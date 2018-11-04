@@ -4,6 +4,9 @@ import numpy as np
 NORM = 1
 
 def calc_chaos(image_concepts):
+    if len(image_concepts) < 2:
+        return 0
+    
     chaos_vector = []
     for i, concept1 in enumerate(image_concepts):
         relativity_vector = []
