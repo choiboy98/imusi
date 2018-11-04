@@ -5,8 +5,7 @@ import { Camera, Permissions } from 'expo';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
 import FormData from 'FormData';
-
-var base64js = require('base64-js');
+import Loader from './Loader';
 
 export default class CameraScene extends React.Component {
   state = {
@@ -14,6 +13,7 @@ export default class CameraScene extends React.Component {
     type: Camera.Constants.Type.back,
     flash: false,
     byteArray: '',
+    loading: false
   };
 
   async componentDidMount() {
@@ -42,32 +42,22 @@ export default class CameraScene extends React.Component {
   }
 
   async getSpotifyData() {
-    console.log("inside data");
-  try {
+    try {
+      var formData = new FormData();
+      formData.append('bytes', this.state.byteArray);
 
-    console.log(this.state.byteArray.substring(0, 100));
-
-    console.log("inside try");
-
-    var formData = new FormData();
-    formData.append('bytes', this.state.byteArray);
-
-    let response = await fetch('https://imusi.herokuapp.com/image/', {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: formData,
-    });
-    console.log(response);
-    //let responseJson = await response.json();
-    //console.log(responseJson);
-    //return responseJson.result.crimes;
-  } catch (error) {
-    console.error(error);
-  }
+      let response = await fetch('https://imusi.herokuapp.com/image/', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: formData,
+      });
+    } catch (error) {
+      console.error(error);
+    }
 }
 
   bin2String(array) {
@@ -94,6 +84,7 @@ export default class CameraScene extends React.Component {
 
       return (
         <View style={styles.container}>
+          <Loader loading={this.state.loading} />
           <Camera style={styles.container} type={this.state.type} ref = {this.setCameraRef}>
             <View style={styles.buttonContainer}>
 

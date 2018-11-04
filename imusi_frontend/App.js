@@ -4,7 +4,9 @@ import { StyleSheet, Text, View } from 'react-native';
 import Login from './Scenes/Login';
 import Camera from './Scenes/CameraScene'
 
-export default class App extends React.Component {
+import { createStackNavigator } from 'react-navigation';
+
+class App extends React.Component {
   render() {
     return (
       //<Login />
@@ -12,6 +14,21 @@ export default class App extends React.Component {
     );
   }
 }
+
+export default createStackNavigator({
+  Home: {
+    screen: Login
+  },
+  CameraScreen: {
+    screen: Camera
+  }
+},
+{
+    headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
+    }
+});
 
 const styles = StyleSheet.create({
   container: {
