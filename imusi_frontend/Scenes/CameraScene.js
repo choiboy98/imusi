@@ -38,7 +38,10 @@ export default class CameraScene extends React.Component {
   snap = async() => {
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({base64: true});
+      console.log(photo.base64.length);
       let shrunk64 = resizebase64(photo.base64, MAX_WIDTH);
+      console.log(shrunk64.length);
+      
       this.setState({
         loading: true,
       });
