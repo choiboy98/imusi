@@ -8,6 +8,9 @@ import ImageResizer from 'react-native-image-resizer';
 import FormData from 'FormData';
 import Loader from './Loader';
 
+var resizebase64 = require('resize-base64');
+let MAX_WIDTH = 250;
+
 export default class CameraScene extends React.Component {
   state = {
     hasCameraPermission: null,
@@ -35,9 +38,10 @@ export default class CameraScene extends React.Component {
   snap = async() => {
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({base64: true});
+      let shrunk64 = resizebase64(photo.base64, MAX_WIDTH);
       this.setState({
         loading: true,
-        byteArray: photo.base64,
+        byteArray: shrunk64,
       });
       this.getSpotifyData()
     }

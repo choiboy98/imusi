@@ -1,4 +1,4 @@
-from model.word_relativity import calc_word_relativity
+from word_relativity import calc_word_relativity
 import numpy as np
 
 NORM = 1
@@ -13,7 +13,9 @@ def calc_chaos(image_concepts):
         for concept2 in image_concepts:
             if concept1 == concept2:
                 continue
-            relativity_vector.append(calc_word_relativity(concept1, concept2))
+            relativeness = calc_word_relativity(concept1, concept2)
+            print(concept1, concept2, relativeness)
+            relativity_vector.append(relativeness)
 
         relativity_vector = np.array(relativity_vector)
         chaos = 1 - np.average(relativity_vector)
@@ -23,5 +25,5 @@ def calc_chaos(image_concepts):
     return np.average(chaos_vector)
 
 if __name__ == '__main__':
-    print(calc_chaos(['grass', 'tree', 'green']))
+    print(calc_chaos(['desert', 'sand', 'dune', 'adventure', 'arid']))
     print(calc_chaos(['bird', 'train', 'technology']))

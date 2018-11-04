@@ -7,9 +7,9 @@ from model.image_utils import bytes_to_rgb
 
 def calculate_image_vector(image_bytes, concepts):
     image_arr = bytes_to_rgb(image_bytes)
-    t = calc_image_temperature(image_arr)
-    v = calc_vibrance(image_arr)
-    c = calc_chaos(concepts)
-    p = calc_popularity(concepts)
-    v = calc_valence(image_arr, concepts)
-    return (t, v, c, p, v)
+    temperature = calc_image_temperature(image_arr)
+    vibrance = calc_vibrance(image_arr)
+    chaos = calc_chaos(concepts)
+    popularity = calc_popularity(concepts)
+    valence = calc_valence(image_arr, concepts)
+    return (temperature, vibrance, chaos, popularity, valence)
