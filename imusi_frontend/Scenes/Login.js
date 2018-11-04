@@ -1,69 +1,79 @@
 import React from "react";
 import { Button, StyleSheet, View, Dimensions, Text, Image, TextInput, ImageBackground , Icon} from "react-native";
 
-
 export default class Login extends React.Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-
-    };
+      this.state = {
+        didAuthorize: false,
+      }
   }
 
   componentDidMount() {
   }
 
-  render() {
-    return (
-      <View style = {styles.container}>
-        <View style = {styles.logoContainer}>
-
-          <ImageBackground
-            source = {require("../assets/snowy_mountain_background.png")}
-            style = {styles.logoContainer}
-            >
-          <Image
-            style = {{width:400,height:250,marginTop: 40}}
-            source = {require('../assets/imusi_logo_2.png')}
-            
-            />
-          
-          <TextInput
-            style = {styles.input} 
-            autocorrect = {false}
-            placeholder = "Spotify Username"
-            />
-
-          <TextInput
-            style = {styles.input2}
-            autocorrect = {false}
-            placeholder = "Password"
-            />
-
-          <View style = {styles.buttonBox}>
-            <Button title="Log in" color = "#fff" onPress={() => this.props.navigation.navigate('CameraScreen')}/>
-
-            </View>
-
-          <Text style = {{color: '#fff', marginTop: 100, marginBottom: 5, textAlign: 'center'}}>
-            Don't have Spotify?
-            </Text> 
-
-          <View style = {styles.buttonBox1}>
-          
-            <Button 
-              color = "rgb(154,236,219)"
-              title = 'Skip this step'
-              marginBottom = {20}
-              onPress={() => this.props.navigation.navigate('CameraScreen')}
-            />
-            </View>
-          </ImageBackground>
-        </View>
-      </View>
-    );
+  shouldProceed() {
+    console.log("inside proceed");
+    if (this.state.didAuthorize) {
+      this.props.navigation.navigate('CameraScreen');
+    }
   }
+
+  goingToAuth = () => {
+    this.state.didAuthorize = true;
+    this.props.navigation.navigate('SpotifyAuthScreen');
+  }
+
+  render() {
+    this.shouldProceed;
+    return (
+    <View style = {styles.container}>
+      <View style = {styles.logoContainer}>
+
+        <ImageBackground
+          source = {require("../assets/snowy_mountain_background.png")}
+          style = {styles.logoContainer}
+          >
+        <Image
+          style = {{width:400,height:250,marginTop: 40}}
+          source = {require('../assets/imusi_logo_2.png')}
+          
+          />
+        
+        <TextInput
+          style = {styles.input} 
+          autocorrect = {false}
+          placeholder = "Spotify Username"
+          />
+
+        <TextInput
+          style = {styles.input2}
+          autocorrect = {false}
+          placeholder = "Password"
+          />
+
+        <View style = {styles.buttonBox}>
+          <Button title="Log in" color = "#fff" onPress={this.goingToAuth}/>
+
+          </View>
+
+        <Text style = {{color: '#fff', marginTop: 100, marginBottom: 5, textAlign: 'center'}}>
+          Don't have Spotify?
+          </Text> 
+
+        <View style = {styles.buttonBox1}>
+        
+          <Button 
+            color = "rgb(154,236,219)"
+            title = 'Skip this step'
+            marginBottom = {20}
+            onPress={() => this.props.navigation.navigate('CameraScreen')}
+          />
+          </View>
+        </ImageBackground>
+      </View>
+    </View>
+  );}
 }
 
 const styles = StyleSheet.create({
