@@ -1,6 +1,8 @@
+import nltk
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
 import pickle
 
+nltk.download('vader_lexicon')
 
 def calc_sentiment(sentence):
     sentiment_analyzer = SentimentIntensityAnalyzer()

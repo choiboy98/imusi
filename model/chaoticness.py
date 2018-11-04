@@ -15,9 +15,7 @@ def calc_chaos(image_concepts):
         relativity_vector = np.array(relativity_vector)
         chaos = 1 - np.average(relativity_vector)
         chaos_vector.append(chaos)
-    print(chaos_vector)
-    import sys
-    sys.stdout.flush()
+
     chaos_vector = np.array(chaos_vector)
     return np.average(chaos_vector)
 
