@@ -3,6 +3,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import Login from './Scenes/Login';
 import Camera from './Scenes/CameraScene'
+//import Pandora from './components/PandoraCalls'
 
 import { createStackNavigator } from 'react-navigation';
 
@@ -21,7 +22,8 @@ export default createStackNavigator({
   },
   CameraScreen: {
     screen: Camera
-  }
+  },
+
 },
 {
     headerMode: 'none',
