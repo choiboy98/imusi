@@ -37,7 +37,4 @@ def get_recommendations(acousticness, danceability, energy, speechiness, valence
                       'name': track['name'],
                       'id': track['id'],
                       'image_link': get_best_image_line(track)})
-        print(songs[-1])
-    import sys
-    sys.stdout.flush()
     return songs
