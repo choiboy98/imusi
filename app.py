@@ -33,18 +33,20 @@ def handle_image():
         return redirect(url_for('upload_image'))
 
     img_str = base64.b64encode(file.stream.read())
-    return get_songs(img_str)
+    tracks = get_songs(img_str)
+    return render_template('results.html', tracks=tracks)
 
 @app.route('/image/', methods=["POST"])
 def post_image():
     image_bytes = request.form['bytes'].encode()
-    return get_songs(image_bytes)
+    tracks = get_songs(image_bytes)
+    return json.dumps(tracks)
 
 def get_songs(image_bytes):
     concepts = get_relevant_concepts(image_bytes)
     feature_vector = calculate_image_vector(image_bytes, concepts)
     songs = get_recommendations(*feature_vector)
-    return json.dumps(songs)
+    return songs
 
 if __name__ == '__main__':
     app.logger.addHandler(logging.StreamHandler(sys.stdout))
