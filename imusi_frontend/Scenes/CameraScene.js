@@ -3,6 +3,7 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 
 import { Camera, Permissions } from 'expo';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
+import ImageResizer from 'react-native-image-resizer';
 
 import FormData from 'FormData';
 import Loader from './Loader';
@@ -34,10 +35,11 @@ export default class CameraScene extends React.Component {
   snap = async() => {
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({base64: true});
-      this.state.byteArray = photo.base64;
+      this.setState({
+        loading: true,
+        byteArray: photo.base64,
+      });
       this.getSpotifyData()
-      //console.log(this.state.byteArray);
-      //console.log(base64js.toByteArray(photo['base64']));
     }
   }
 
@@ -54,20 +56,25 @@ export default class CameraScene extends React.Component {
           'Content-Type': 'application/json',
         },
         body: formData,
-      });
+      }).then((fetchedMusic) => {
+        this.setState({
+          loading:false,
+        })
+                console.log(fetchedMusic);
+
+      }
+      // fetchedMusic.json())
+      // .then((fetchedMusicJson) => {
+      //   this.setState({
+      //     loading:false,
+      //   })
+      //   console.log(fetchedMusicJson)
+      // }
+      );
     } catch (error) {
       console.error(error);
     }
-}
-
-  bin2String(array) {
-    var result = "";
-    for (var i = 0; i < array.length; i++) {
-      result += String.fromCharCode(array[i], 2);
-    }
-    return result;
   }
-
 
   setCameraRef = (ref) => {
     this.camera = ref;
