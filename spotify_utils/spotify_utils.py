@@ -1,17 +1,24 @@
-import sys
 import spotipy
-import spotipy.util as util
 from spotipy.oauth2 import SpotifyClientCredentials
+import os
 
-client_credentials_manager = SpotifyClientCredentials(client_id=SPOTIPY_CLIENT_ID, client_secret=SPOTIPY_CLIENT_SECRET)
+client_id = os.environ.get('SPOTIPY_CLIENT_ID')
+client_secret = os.environ.get('SPOTIPY_CLIENT_SECRET')
+client_credentials_manager = SpotifyClientCredentials(client_id=client_id, client_secret=client_secret)
 sp = spotipy.Spotify(client_credentials_manager=client_credentials_manager)
 
-def get_recommendations(seed_genres, target_acousticness, target_danceability, target_energy,
-			target_speechiness, target_valence):
-	
-	results = sp.recommendations(seed_genres=seed_genres ,target_danceability=target_danceability, target_energy=target_energy,
-		target_speechiness=target_speechiness, target_valence=target_valence, target_acousticness=target_acousticness)
-	songs = []
-	for tracks in results['tracks']:
-		songs.append((tracks['artists'][0]['name'],tracks['name'],tracks['id']))
-	return songs
+GENRES = ["acoustic",
+    "classical",
+    "hip-hop",
+    "pop",
+    "rock"]
+
+def get_recommendations(acousticness, danceability, energy, speechiness, valence):
+    results = sp.recommendations(seed_genres=GENRES, target_danceability=danceability, target_energy=energy,
+                                 target_speechiness=speechiness, target_valence=valence, target_acousticness=acousticness)
+    songs = []
+    for track in results['tracks']:
+        songs.append({'artists': track['artists'][0]['name'],
+                      'name': track['name'],
+                      'id': track['id']})
+    return songs
