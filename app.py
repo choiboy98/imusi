@@ -19,11 +19,11 @@ def index():
 def login():
     return redirect(url_for('upload_image'))
 
-@app.route('/upload/', methods=["GET"])
+@app.route('/image/', methods=["GET"])
 def upload_image():
     return render_template('upload.html')
 
-@app.route('/image/', methods=["POST"])
+@app.route('/handle/', methods=["POST"])
 def handle_image():
     if 'file' not in request.files:
         return redirect(url_for('upload_image'))
