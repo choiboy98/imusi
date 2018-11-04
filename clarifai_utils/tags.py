@@ -11,8 +11,15 @@ def valid_concept(concept):
     return concept not in BLACK_LIST and ' ' not in concept
 
 def get_relevant_tags(image_bytes):
+    import sys
+    print('passed here1')
+    sys.stdout.flush()
     image = app.inputs.create_image_from_base64(image_bytes)
+    print('passed here2')
+    sys.stdout.flush()
     response_data = model.predict([image])
+    print('passed here3')
+    sys.stdout.flush()
  
     concepts = []
     for concept in response_data['outputs'][0]['data']['concepts']:
