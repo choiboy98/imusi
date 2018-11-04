@@ -17,7 +17,7 @@ def calculate_image_vector(image_bytes, concepts):
     scale = 1
     if image_arr.shape[0] > MAX_WIDTH:
         scale = MAX_WIDTH / image_arr.shape[0]
-    image_arr = cv2.resize(image_array, (0, 0), fx=scale, fy=scale)
+    image_arr = cv2.resize(image_arr, (0, 0), fx=scale, fy=scale)
 
     print('here2')
     sys.stdout.flush()
