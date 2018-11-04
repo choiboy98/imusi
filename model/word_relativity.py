@@ -13,7 +13,6 @@ def calc_word_relativity(word1, word2):
     for i, j in list(product(sem1, sem2)):
         if valid_synset(i, word1) and valid_synset(j, word2):
             score = i.wup_similarity(j) # Wu-Palmer Similarity
-            print(i, j, score)
             if score != None:
                 max_score = max(max_score, score)
 

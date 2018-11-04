@@ -20,10 +20,6 @@ def post_image():
 	image_bytes = request.form['bytes'].encode()
 	concepts = get_relevant_tags(image_bytes)
 	feature_vector = calculate_image_vector(image_bytes, concepts)
-	print(concepts)
-	print(feature_vector)
-	sys.stdout.flush()
-
 	songs = get_recommendations(*feature_vector)
 
 	return json.dumps(songs)
