@@ -20,5 +20,6 @@ def get_recommendations(acousticness, danceability, energy, speechiness, valence
     for track in results['tracks']:
         songs.append({'artists': track['artists'][0]['name'],
                       'name': track['name'],
-                      'id': track['id']})
+                      'id': track['id'],
+                      'image': track['album']['images'][0]['url']})
     return songs
