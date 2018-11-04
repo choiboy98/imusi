@@ -2,6 +2,8 @@ import nltk
 from nltk.corpus import wordnet as wn
 from itertools import product
 
+nltk.download('wordnet')
+
 def valid_synset(synset, word):
     synset_word = synset.name()[:synset.name().find('.')]
     return word.startswith(synset_word)
