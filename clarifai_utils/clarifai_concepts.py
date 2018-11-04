@@ -10,7 +10,7 @@ model = app.public_models.general_model
 def valid_concept(concept):
     return concept not in BLACK_LIST and ' ' not in concept
 
-def get_relevant_tags(image_bytes):
+def get_relevant_concepts(image_bytes):
     image = app.inputs.create_image_from_base64(image_bytes)
     response_data = model.predict([image])
  
