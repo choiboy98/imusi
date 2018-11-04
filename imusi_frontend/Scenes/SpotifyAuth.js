@@ -4,11 +4,13 @@ import { StyleSheet, Text, View, WebView, Linking } from 'react-native';
 var SpotifyWebApi = require('spotify-web-api-node');
 var scopes = ['user-read-private', 'user-read-email'],
     redirectUri = 'http://localhost:8888/callback/',
+    clientSecret = '1ZY1PqizIl78geGM4xWlEA',
     clientId = 'c38558d936cf40cfbf11a34fcecaa36a';
 
 // Setting credentials can be done in the wrapper's constructor, or using the API object's setters.
 var spotifyApi = new SpotifyWebApi({
   redirectUri: redirectUri,
+  clientSecret: clientSecret,
   clientId: clientId
 });
 
@@ -29,9 +31,9 @@ export default class SpotifyAuth extends React.Component {
       this.state.codeUri = webViewState.url;
       this.state.codeUri = this.state.codeUri.substring(this.state.codeUri.indexOf("=") + 1, this.state.codeUri.length);
 
-      this.props.navigation.navigate("CameraScreen", {
-              code: this.state.codeUri,
-            });
+      // this.getToken();  GET TOKEN PROBLEM IS DUE TO THE FACT THAT YOU CANT REQUEST TOKENS ON CLIENT SIDE
+
+      this.props.navigation.navigate("CameraScreen");
     }
   }
 

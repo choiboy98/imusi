@@ -56,7 +56,6 @@ export default class CameraScene extends React.Component {
   async getSpotifyData() {
     try {
       var formData = new FormData();
-      console.log(this.state.byteArray.substring(0, 100));
       formData.append('bytes', this.state.byteArray);
 
       let response = await fetch('https://imusi.herokuapp.com/image/', {
@@ -71,10 +70,12 @@ export default class CameraScene extends React.Component {
       .then((fetchedMusicJson) => {
         this.setState({
           loading:false,
-        })
-        console.log(fetchedMusicJson)
-      }
-      );
+        });
+        console.log(fetchedMusicJson);
+        this.props.navigation.navigate("MusicScreen", {
+          fetchedMusic: fetchedMusicJson
+        });  
+      });
     } catch (error) {
       console.error(error);
     }

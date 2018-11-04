@@ -4,6 +4,7 @@ import { StyleSheet, Text, View, WebView, Linking } from 'react-native';
 import Login from './Scenes/Login';
 import Camera from './Scenes/CameraScene';
 import SpotifyAuth from './Scenes/SpotifyAuth';
+import Music from './Scenes/Music'
 
 import {createStackNavigator} from 'react-navigation';
 //import Spotify from './spotify_api'
@@ -31,8 +32,14 @@ export default createStackNavigator({
   },
   SpotifyAuthScreen: {
     screen: SpotifyAuth
+  },
+  MusicScreen: {
+    screen: Music,
+    navigationOptions: {
+      header: null,
+      headerMode: 'screen',
+    }
   }
-
 },
 {
     // headerMode: 'none',

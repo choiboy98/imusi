@@ -39,19 +39,7 @@ export default class Login extends React.Component {
           source = {require('../assets/imusi_logo_2.png')}
           
           />
-        
-        <TextInput
-          style = {styles.input} 
-          autocorrect = {false}
-          placeholder = "Spotify Username"
-          />
-
-        <TextInput
-          style = {styles.input2}
-          autocorrect = {false}
-          placeholder = "Password"
-          />
-
+          
         <View style = {styles.buttonBox}>
           <Button title="Log in" color = "#fff" onPress={this.goingToAuth}/>
 
