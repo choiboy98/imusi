@@ -52,7 +52,7 @@ export default class Music extends React.Component {
                     <Icon
                         onPress={this.toggleIsTrue}
                         name = "arrow-back"
-                        size = {30}
+                        size = {50}
                         color = 'white'
                         marginLeft = {10}
                         marginTop = {10}
@@ -72,19 +72,20 @@ export default class Music extends React.Component {
           >
             <ScrollView style={styles.logoContainer}>
                 {this.state.fetchedMusic.map(song => (
-                    <TouchableOpacity style={{flex: 1, flexDirection: 'column', marginTop: 5, marginBottom: 5}}
+                    <TouchableOpacity style={{flex: 1, flexDirection: 'row', marginTop: 5, marginBottom: 5}}
                                       onPress={() => this.playMusic(song.id)}>
-                            <ImageBackground style={{width: '100%', height: 180, 
-                        }}
+                            <ImageBackground style={{width: '75%', height: 180, }}
                            resizeMode="contain"
                            source={{uri: song.image_link}}/>
-                            <Text style={{ padding: 10, fontSize: 18, color: 'white' }}>
-                                {song.name}
-                            </Text>
+                           <View style={{flex:1, flexDirection: 'column'}}>
+                                <Text style={{ padding: 0, fontSize: 15, color: 'white', }}>
+                                    {song.name}
+                                </Text>
 
-                            <Text style={{ paddingLeft: 10, fontSize: 18, color: 'white' }}>
-                                {song.artist}
-                            </Text>
+                                <Text style={{ paddingTop: 3, fontSize: 15, color: 'white', }}>
+                                    {song.artist}
+                                </Text>
+                            </View>
                     </TouchableOpacity>
                 ))}
 
