@@ -12,8 +12,4 @@ def get_relevant_tags(image_bytes):
     concepts = []
     for concept in response_data['outputs'][0]['data']['concepts']:
         concepts.append(concept['name'])
-
     return concepts
-
-#image = "carnival.jpg"
-#print (' '.join(get_relevant_tags(image)))
