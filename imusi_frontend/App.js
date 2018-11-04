@@ -28,6 +28,7 @@ export default class App extends React.Component {
     }
   }
 
+
   render() {
     if (authorizeURL === undefined) {
       return (<View/>);
@@ -47,6 +48,22 @@ export default class App extends React.Component {
     }
   }
 }
+
+export default createStackNavigator({
+  Home: {
+    screen: Login
+  },
+  CameraScreen: {
+    screen: Camera
+  },
+
+},
+{
+    headerMode: 'none',
+    navigationOptions: {
+        headerVisible: false,
+    }
+});
 
 const styles = StyleSheet.create({
   container: {

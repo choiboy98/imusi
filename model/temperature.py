@@ -32,7 +32,8 @@ def calc_temperature(dominant_color):
     return 1 - (min(temperature[0], MAX) / MAX)
 
 def calc_image_temperature(image_array):
-    dominant = get_dominant_color(image)
+    smaller_image = cv2.resize(image_array, (0, 0), fx=0.5, fy=0.5)
+    dominant = get_dominant_color(smaller_image)
     temperature = calc_temperature(dominant)
     return temperature
 

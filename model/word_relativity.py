@@ -1,3 +1,4 @@
+import nltk
 from nltk.corpus import wordnet as wn
 from itertools import product
 
@@ -21,3 +22,4 @@ if __name__ == '__main__':
     print(calc_word_relativity('cat', 'dog'))
     print(calc_word_relativity('dog', 'cat'))
     print(calc_word_relativity('dog', 'dog'))
+    print(calc_word_relativity('sand', 'desert'))

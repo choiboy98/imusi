@@ -1,43 +1,34 @@
-from flask import Flask, jsonify, request
-from api.core import create_response, serialize_list, logger
-from image.image_manipulation import get_image, get_as_base64
 from clarifai_utils.tags import get_relevant_tags
-from model.model import calculate_image_vector
+from flask import Flask, jsonify, request
+from image.image_manipulation import get_image, get_as_base64
+import json
 import logging
 import sys
+
+from model.model import calculate_image_vector
+from spotify_utils.spotify_utils import get_recommendations
 
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-	print('hi')
-	sys.stdout.flush()
-	return 'Hello, World!'
+def index():
+	return 'Welcome to imusi!'
 
 # image bytes as parameter
 @app.route('/image/', methods=["POST"])
-def push_image():
-	#print(request.form)
-	# image_bytes = request.form
-	#concepts = get_relevant_tags(image_bytes['bytes'])
-	print(request.form)
-	sys.stdout.flush()
-	image_bytes = request.form['bytes']
-	print(len(image_bytes))
-	sys.stdout.flush()
-	#pipe_model(image_bytes['bytes'], concepts)
+def post_image():
+	image_bytes = request.form['bytes'].encode()
+	concepts = get_relevant_tags(image_bytes)
+	feature_vector = calculate_image_vector(image_bytes, concepts)
+	songs = get_recommendations(*feature_vector)
 
-	return "hi"
+	return json.dumps(songs)
 
-def pipe_model(image_bytes, concepts):
-	features = calculate_image_vector(image_bytes, concepts)
-
-def pipe_spotify():
-	pass
-
-@app.route('/brandon', methods=["GET"])
-def push_brandonc():
-	return 'Hi'
+@app.route('/clarifai/', methods=["POST"])
+def get_concepts():
+	image_bytes = request.form['bytes'].encode()
+	concepts = get_relevant_tags(image_bytes)
+	return json.dumps(concepts)
 
 if __name__ == '__main__':
 	app.logger.addHandler(logging.StreamHandler(sys.stdout))

@@ -4,14 +4,19 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
-var base64js = require('base64-js');
+import FormData from 'FormData';
+import Loader from './Loader';
+
+var resizebase64 = require('resize-base64');
+let MAX_WIDTH = 100;
 
 export default class CameraScene extends React.Component {
   state = {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
     flash: false,
-    byteArray: null
+    byteArray: '',
+    loading: false
   };
 
   async componentDidMount() {
@@ -30,37 +35,50 @@ export default class CameraScene extends React.Component {
   }
 
   snap = async() => {
+    console.log("pressed!");
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({base64: true});
-      this.state.byteArray = base64js.toByteArray(photo.base64);
+      this.setState({
+        loading: true,
+      });
+
+      // console.log(photo.uri);
+      // console.log(photo.base64.length);
+      // let shrunk64 = resizebase64(photo.base64, MAX_WIDTH);
+      // console.log("length" + shrunk64.length);
+
+
+      this.state.byteArray = photo.base64;
       this.getSpotifyData()
-      //console.log(this.state.byteArray);
-      //console.log(base64js.toByteArray(photo['base64']));
     }
   }
 
   async getSpotifyData() {
-    console.log("inside data");
-  try {
-    console.log("inside try");
-    let response = await fetch('https://imusi.herokuapp.com/image', {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        bytes: this.state.byteArray,
-      }),
-    });
-    console.log(response);
-    //let responseJson = await response.json();
-    //console.log(responseJson);
-    //return responseJson.result.crimes;
-  } catch (error) {
-    console.error(error);
+    try {
+      var formData = new FormData();
+      console.log(this.state.byteArray.substring(0, 100));
+      formData.append('bytes', this.state.byteArray);
+
+      let response = await fetch('https://imusi.herokuapp.com/image/', {
+        method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: formData,
+      }).then((fetchedMusic) => fetchedMusic.json())
+      .then((fetchedMusicJson) => {
+        this.setState({
+          loading:false,
+        })
+        console.log(fetchedMusicJson)
+      }
+      );
+    } catch (error) {
+      console.error(error);
+    }
   }
-}
 
   setCameraRef = (ref) => {
     this.camera = ref;
@@ -77,6 +95,7 @@ export default class CameraScene extends React.Component {
 
       return (
         <View style={styles.container}>
+          <Loader loading={this.state.loading} />
           <Camera style={styles.container} type={this.state.type} ref = {this.setCameraRef}>
             <View style={styles.buttonContainer}>
 
