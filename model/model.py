@@ -1,8 +1,8 @@
-from model.temperature import calc_image_temperature
-from model.vibrance import calc_vibrance
-from model.chaoticness import calc_chaos
-from model.popularity import calc_popularity
-from model.valence import calc_valence
+from model.temperature import calc_image_temperature #acoustiness
+from model.vibrance import calc_vibrance # danceability
+from model.chaoticness import calc_chaos # energy
+from model.popularity import calc_popularity # speechiness
+from model.valence import calc_valence # valence
 from model.image_utils import bytes_to_rgb
 
 def calculate_image_vector(image_bytes, concepts):

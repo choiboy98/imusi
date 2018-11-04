@@ -3,22 +3,23 @@ from api.core import create_response, serialize_list, logger
 from image.image_manipulation import get_image, get_as_base64
 from clarifai_utils.tags import get_relevant_tags
 from model.model import calculate_image_vector
+import logging
+import sys
 
 app = Flask(__name__)
 
 @app.route('/')
 def hello_world():
-    return 'Hello, World!'
+	return 'Hello, World!'
 
 # image bytes as parameter
-@app.route('/image', methods=["POST"])
+@app.route('/image/', methods=["POST"])
 def push_image():
-	print("hi")
-	#print(request.form)
-	image_base64 = request.form
-	print(image_base64['bytes'])
-	get_image(image_base64['base64'])
-	return 'Hi'
+	image_bytes = request.form['bytes']
+	concepts = get_relevant_tags(image_bytes)
+	#pipe_model(image_bytes['bytes'], concepts)
+
+	return concepts
 
 def pipe_model(image_bytes, concepts):
 	features = calculate_image_vector(image_bytes, concepts)
@@ -31,4 +32,6 @@ def push_brandonc():
 	return 'Hi'
 
 if __name__ == '__main__':
-	app.run()
+	app.logger.addHandler(logging.StreamHandler(sys.stdout))
+	app.logger.setLevel(logging.ERROR)
+	app.run(debug=True)

@@ -4,6 +4,8 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native';
 import { Camera, Permissions } from 'expo';
 import { MaterialIcons, Ionicons } from '@expo/vector-icons';
 
+import FormData from 'FormData';
+
 var base64js = require('base64-js');
 
 export default class CameraScene extends React.Component {
@@ -11,7 +13,7 @@ export default class CameraScene extends React.Component {
     hasCameraPermission: null,
     type: Camera.Constants.Type.back,
     flash: false,
-    byteArray: null
+    byteArray: '',
   };
 
   async componentDidMount() {
@@ -32,11 +34,50 @@ export default class CameraScene extends React.Component {
   snap = async() => {
     if (this.camera) {
       let photo = await this.camera.takePictureAsync({base64: true});
-      this.state.byteArray = base64js.toByteArray(photo.base64);
+      this.state.byteArray = photo.base64;
+      this.getSpotifyData()
       //console.log(this.state.byteArray);
       //console.log(base64js.toByteArray(photo['base64']));
     }
   }
+
+  async getSpotifyData() {
+    console.log("inside data");
+  try {
+
+    console.log(this.state.byteArray.substring(0, 100));
+
+    console.log("inside try");
+
+    var formData = new FormData();
+    formData.append('bytes', this.state.byteArray);
+
+    let response = await fetch('https://imusi.herokuapp.com/image/', {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: formData,
+    });
+    console.log(response);
+    //let responseJson = await response.json();
+    //console.log(responseJson);
+    //return responseJson.result.crimes;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+  bin2String(array) {
+    var result = "";
+    for (var i = 0; i < array.length; i++) {
+      result += String.fromCharCode(array[i], 2);
+    }
+    return result;
+  }
+
 
   setCameraRef = (ref) => {
     this.camera = ref;
