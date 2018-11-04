@@ -1,4 +1,4 @@
-from clarifai_utils.tags import get_relevant_tags
+from clarifai_utils.clarifai_concepts import get_relevant_concepts
 from flask import Flask, jsonify, request
 from image.image_manipulation import get_image, get_as_base64
 import json
@@ -18,7 +18,7 @@ def index():
 @app.route('/image/', methods=["POST"])
 def post_image():
 	image_bytes = request.form['bytes'].encode()
-	concepts = get_relevant_tags(image_bytes)
+	concepts = get_relevant_concepts(image_bytes)
 	feature_vector = calculate_image_vector(image_bytes, concepts)
 	songs = get_recommendations(*feature_vector)
 
@@ -27,7 +27,7 @@ def post_image():
 @app.route('/clarifai/', methods=["POST"])
 def get_concepts():
 	image_bytes = request.form['bytes'].encode()
-	concepts = get_relevant_tags(image_bytes)
+	concepts = get_relevant_concepts(image_bytes)
 	return json.dumps(concepts)
 
 if __name__ == '__main__':
